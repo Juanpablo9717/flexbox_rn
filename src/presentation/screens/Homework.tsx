@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {CustomModal} from '../components/CustomModal/CustomModal';
 
 interface ArrorBtnProps {
   action: () => void;
@@ -21,8 +22,29 @@ const ArrowButton = ({action, label, disabled}: ArrorBtnProps) => {
 
 export const Homework = () => {
   const [currentTask, setCurrentTask] = useState(1);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
   return (
     <View style={styles.container}>
+      {/* Modal */}
+      <CustomModal
+        closeModal={() => closeModal()}
+        modalVisible={modalVisible}
+        imageId={currentTask}
+      />
+      {/* FAB open modal */}
+      <Pressable style={styles.fab} onPress={() => openModal()}>
+        <Text style={{color: 'black', fontSize: 18}}>{'!'}</Text>
+      </Pressable>
+
+      {/* Content */}
       <View style={[styles.box, styles.purpleBox]} />
       <View style={[styles.box, styles.orangeBox]} />
       <View style={[styles.box, styles.blueBox]} />
@@ -71,6 +93,17 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: 'black',
   },
+  fab: {
+    backgroundColor: '#6d9cfb',
+    borderRadius: 100,
+    height: 30,
+    width: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    right: 20,
+    top: 20,
+  },
   container: {
     flex: 1,
     backgroundColor: '#28425b',
@@ -78,6 +111,8 @@ const styles = StyleSheet.create({
   box: {
     height: 100,
     width: 100,
+    borderWidth: 10,
+    borderColor: 'white',
   },
   purpleBox: {
     backgroundColor: '#5856d6',
