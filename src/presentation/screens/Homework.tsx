@@ -36,23 +36,24 @@ export const Homework = () => {
     setModalVisible(false);
   };
   return (
-    <View style={[styles.container, calcStyles.container]}>
-      {/* Modal */}
-      <CustomModal
-        closeModal={() => closeModal()}
-        modalVisible={modalVisible}
-        imageId={currentTask}
-      />
-      {/* FAB open modal */}
-      <Pressable style={styles.fab} onPress={() => openModal()}>
-        <Text style={{color: 'black', fontSize: 18}}>{'!'}</Text>
-      </Pressable>
+    <>
+      <View style={[styles.container, calcStyles.container]}>
+        {/* Modal */}
+        <CustomModal
+          closeModal={() => closeModal()}
+          modalVisible={modalVisible}
+          imageId={currentTask}
+        />
+        {/* FAB open modal */}
+        <Pressable style={styles.fab} onPress={() => openModal()}>
+          <Text style={{color: 'black', fontSize: 18}}>{'!'}</Text>
+        </Pressable>
 
-      {/* Content */}
-      <View style={[styles.box, styles.purpleBox, calcStyles.purpleBox]} />
-      <View style={[styles.box, styles.orangeBox, calcStyles.orangeBox]} />
-      <View style={[styles.box, styles.blueBox, calcStyles.blueBox]} />
-
+        {/* Content */}
+        <View style={[styles.box, styles.purpleBox, calcStyles.purpleBox]} />
+        <View style={[styles.box, styles.orangeBox, calcStyles.orangeBox]} />
+        <View style={[styles.box, styles.blueBox, calcStyles.blueBox]} />
+      </View>
       <View style={[styles.actionsContaner]}>
         <ArrowButton
           action={() => setCurrentTask(currentTask - 1)}
@@ -68,7 +69,7 @@ export const Homework = () => {
           disabled={currentTask >= 10}
         />
       </View>
-    </View>
+    </>
   );
 };
 
