@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {CustomModal} from '../components/CustomModal/CustomModal';
 import {useHomeworkScreen} from '../../hooks/useGetStylesByExercise';
+import {colors} from '../theme/colors';
 
 interface ArrorBtnProps {
   action: () => void;
@@ -36,7 +37,7 @@ export const Homework = () => {
     setModalVisible(false);
   };
   return (
-    <>
+    <View style={{flex: 1}}>
       <View style={[styles.container, calcStyles.container]}>
         {/* Modal */}
         <CustomModal
@@ -44,16 +45,16 @@ export const Homework = () => {
           modalVisible={modalVisible}
           imageId={currentTask}
         />
-        {/* FAB open modal */}
-        <Pressable style={styles.fab} onPress={() => openModal()}>
-          <Text style={{color: 'black', fontSize: 18}}>{'!'}</Text>
-        </Pressable>
 
         {/* Content */}
         <View style={[styles.box, styles.purpleBox, calcStyles.purpleBox]} />
         <View style={[styles.box, styles.orangeBox, calcStyles.orangeBox]} />
         <View style={[styles.box, styles.blueBox, calcStyles.blueBox]} />
       </View>
+      {/* FAB open modal */}
+      <Pressable style={styles.fab} onPress={() => openModal()}>
+        <Text style={{color: 'black', fontSize: 18}}>{'!'}</Text>
+      </Pressable>
       <View style={[styles.actionsContaner]}>
         <ArrowButton
           action={() => setCurrentTask(currentTask - 1)}
@@ -69,7 +70,7 @@ export const Homework = () => {
           disabled={currentTask >= 10}
         />
       </View>
-    </>
+    </View>
   );
 };
 
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#28425b',
+    backgroundColor: colors.mainGray,
   },
   box: {
     height: 100,

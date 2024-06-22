@@ -1,13 +1,20 @@
 /* eslint-disable react-native/no-inline-styles */
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, StatusBar, View} from 'react-native';
 import React from 'react';
 import {Homework} from './src/presentation/screens/Homework';
+import {colors} from './src/presentation/theme/colors';
 
 const App = () => {
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <Homework />
-    </SafeAreaView>
+    <View style={{flex: 1, backgroundColor: colors.mainGray}}>
+      <SafeAreaView style={{flex: 1}}>
+        <StatusBar
+          backgroundColor={colors.mainGray}
+          barStyle={'light-content'}
+        />
+        <Homework />
+      </SafeAreaView>
+    </View>
   );
 };
 
