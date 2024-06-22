@@ -2,6 +2,7 @@
 import React, {useState} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {CustomModal} from '../components/CustomModal/CustomModal';
+import {useHomeworkScreen} from '../../hooks/useGetStylesByExercise';
 
 interface ArrorBtnProps {
   action: () => void;
@@ -24,6 +25,9 @@ export const Homework = () => {
   const [currentTask, setCurrentTask] = useState(1);
   const [modalVisible, setModalVisible] = useState(false);
 
+  const {getStylesById} = useHomeworkScreen();
+  const calcStyles = getStylesById(currentTask);
+
   const openModal = () => {
     setModalVisible(true);
   };
@@ -32,7 +36,7 @@ export const Homework = () => {
     setModalVisible(false);
   };
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, calcStyles.container]}>
       {/* Modal */}
       <CustomModal
         closeModal={() => closeModal()}
@@ -45,9 +49,9 @@ export const Homework = () => {
       </Pressable>
 
       {/* Content */}
-      <View style={[styles.box, styles.purpleBox]} />
-      <View style={[styles.box, styles.orangeBox]} />
-      <View style={[styles.box, styles.blueBox]} />
+      <View style={[styles.box, styles.purpleBox, calcStyles.purpleBox]} />
+      <View style={[styles.box, styles.orangeBox, calcStyles.orangeBox]} />
+      <View style={[styles.box, styles.blueBox, calcStyles.blueBox]} />
 
       <View style={[styles.actionsContaner]}>
         <ArrowButton
@@ -55,11 +59,7 @@ export const Homework = () => {
           label="<"
           disabled={currentTask <= 1}
         />
-        <Text
-          style={[
-            styles.actionText,
-            {marginTop: 5, width: 30, textAlign: 'center'},
-          ]}>
+        <Text style={[styles.actionText, styles.counterDisplay]}>
           {currentTask}
         </Text>
         <ArrowButton
@@ -103,6 +103,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 20,
     top: 20,
+  },
+  counterDisplay: {
+    marginTop: 5,
+    width: 30,
+    textAlign: 'center',
   },
   container: {
     flex: 1,
